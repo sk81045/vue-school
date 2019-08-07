@@ -68,7 +68,7 @@
             </el-tabs>
         </div>
 
-        <el-radio-group v-model="direction">
+   <el-radio-group v-model="direction">
   <el-radio label="ltr">从左往右开</el-radio>
   <el-radio label="rtl">从右往左开</el-radio>
   <el-radio label="ttb">从上往下开</el-radio>
@@ -80,11 +80,15 @@
 </el-button>
 
 <el-drawer
-  title="我是标题"
+  title="古月中学"
   :visible.sync="drawer"
   :direction="direction"
   :before-close="handleClose">
-  <span>我来啦!</span>
+  <img src="https://gss0.bdstatic.com/-4o3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=cb23135ccb3d70cf58f7a25f99b5ba65/562c11dfa9ec8a13d73a1685f503918fa0ecc0b7.jpg">
+ <div class="context">
+  <span>学校简介</span>
+  <p>古月中学，位于河北省平山县古月镇关山脚下·.....那里三面环山，西边是一条河自南向北流如岗南水库。</p>
+</div>
 </el-drawer>
 
 
@@ -133,11 +137,8 @@
         },
 
     handleClose(done) {
-        this.$confirm('确认关闭？')
-          .then(_ => {
             done();
-          })
-          .catch(_ => {});
+  
       }
 
       },
@@ -165,6 +166,16 @@
 }
 .crumbs, .plugins-tips {
     margin-bottom: 20px;
+}
+.img{
+    width: 100%;
+}
+.el-drawer__header {
+    font-size: 30px;
+}
+.context{
+    margin: 10px;
+    color: #72767b;
 }
 </style>
 

@@ -31,3 +31,11 @@ export function delet(data) {
 	  data: {data}
 	}) 
 }
+
+export function query(data) {
+	console.log('dele',data)
+	return request({
+	  url: '/api/v1/queryschool?id='+data,
+	  method: 'get'
+	}) 
+}
