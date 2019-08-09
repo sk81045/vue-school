@@ -67,7 +67,6 @@ export const constantRoutes = [
     }]
   },
 
-
   {
     path: '/charts',
     component: Layout,
@@ -82,13 +81,13 @@ export const constantRoutes = [
 
 
   {
-    path: '/testSS',
+    path: '/analysis',
     component: Layout,
-    redirect: '/testSS',
+    redirect: '/analysis',
     children: [{
-      path: 'test',
-      name: 'test',
-      component: () => import('@/views/test/test'),
+      path: 'analysis',
+      name: 'Analysis',
+      component: () => import('@/views/analysis/analysis'),
       meta: { title: '教学质量分析表', icon: 'dashboard' }
     }]
   },
