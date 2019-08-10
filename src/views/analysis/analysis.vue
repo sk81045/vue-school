@@ -5,16 +5,19 @@
         src="../../../static/img/report/forkme.png"
         alt="Fork me on GitHub"></a> -->
     <div class="item">
-      <h4>各区县学校数据</h4>
+      <aside>各区县学校数据</aside>
       <nx-data-display :option="option" v-if="option.c == 1"></nx-data-display>
     </div>
     <div class="item">
-      <h4>选项卡展示</h4>
+       <aside>数据统计</aside>
       <nx-data-tabs :option="easyDataOption"></nx-data-tabs>
     </div>
     <div class="item">
-      <h4>带数字的展示</h4>
+      <aside>5年内入学人数对比</aside>
       <!-- <nx-data-icons :option="easyDataOption1"></nx-data-icons> -->
+      <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
+      <line-chart :chart-data="lineChartData" />
+    </el-row>
       <el-row :gutter="32">
       <el-col :xs="24" :sm="24" :lg="8">
         <div class="chart-wrapper">
@@ -23,8 +26,6 @@
       </el-col>
     </el-row>
     </div>
-
-
   </div>
 </template>
 <script>
@@ -33,7 +34,32 @@ import { allschool, update, add, delet } from '@/api/analysis'
 import nxDataDisplay from '@/components/nx-data-display/nx-data-display'
 import nxDataTabs from '@/components/nx-data-tabs/nx-data-tabs'
 import nxDataIcons from '@/components/nx-data-icons/nx-data-icons'
+import LineChart from '@/components/LineChart/LineChart'
 import BarChart from '@/components/BarChart/BarChart'
+
+const lineChartData = {
+  newVisitis: {
+    expectedData: [20000, 50885, 60885, 30485, 60885],
+    actualData: [20885, 40885, 30885, 39885, 43885],
+    gzData: [30885, 30522, 520, 50885, 37885]
+  },
+  messages: {
+    expectedData: [200, 192, 120, 144, 160, 130, 140],
+    actualData: [220, 160, 151, 106, 145, 150, 130],
+    gzData: [125, 88, 50, 154, 50, 50, 115]
+  },
+  purchases: {
+    expectedData: [80, 100, 121, 104, 105, 90, 100],
+    actualData: [120, 90, 100, 138, 142, 130, 130],
+    gzData: [125, 88, 50, 154, 50, 50, 115]
+  },
+  shoppings: {
+    expectedData: [130, 140, 141, 142, 145, 150, 160],
+    actualData: [120, 82, 91, 154, 162, 140, 130],
+    gzData: [125, 88, 50, 154, 50, 50, 115]
+  }
+}
+
 
 export default {
   name: 'report',
@@ -41,10 +67,12 @@ export default {
     nxDataDisplay,
     nxDataTabs,
     nxDataIcons,
+    LineChart,
     BarChart
   },
   data() {
     return {
+      lineChartData: lineChartData.newVisitis,
       option: {
         c: false,
         data: []  //各区县学校数据
@@ -219,6 +247,24 @@ export default {
 <style scoped>
 .item {
   margin-bottom: 16px;
+}
+
+.app-container{
+  width: 100%;
+}
+
+aside {
+    background: #eef1f6;
+    padding: 8px 24px;
+    margin-bottom: 20px;
+    border-radius: 2px;
+    display: block;
+    line-height: 32px;
+    font-size: 16px;
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+    color: #2c3e50;
+    -webkit-font-smoothing: antialiased;
+    font-weight: bold;
 }
 </style>
 <style lang ="scss">
