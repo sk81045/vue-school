@@ -50,7 +50,7 @@ export const constantRoutes = [
     children: [{
       path: 'dashboard',
       name: 'Dashboard',
-      component: () => import('@/views/dashboard/index'),
+      component: () => import('@/views/analysis/analysis'),
       meta: { title: '主页', icon: 'dashboard' }
     }]
   },
@@ -81,14 +81,26 @@ export const constantRoutes = [
 
 
   {
-    path: '/analysis',
+    path: '/eduaction',
     component: Layout,
-    redirect: '/analysis',
+    redirect: '/eduaction',
     children: [{
-      path: 'analysis',
-      name: 'Analysis',
-      component: () => import('@/views/analysis/analysis'),
+      path: 'eduaction',
+      name: 'Eduaction',
+      component: () => import('@/views/eduaction/index'),
       meta: { title: '教学质量分析表', icon: 'dashboard' }
+    }]
+  },
+
+  {
+    path: '/excellent',
+    component: Layout,
+    redirect: '/excellent',
+    children: [{
+      path: 'excellent',
+      name: 'Excellent',
+      component: () => import('@/views/eduaction/index'),
+      meta: { title: '优质课评选', icon: 'dashboard' }
     }]
   },
 

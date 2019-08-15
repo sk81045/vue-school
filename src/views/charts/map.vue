@@ -74,7 +74,8 @@ export default {
         center: [114.49828,37.074856],
         resizeEnable: true,
         zoom: 10,
-        mapStyle:'amap://styles/darkblue'
+        mapStyle:'amap://styles/darkblue',
+        // features: [ 'road', 'point']
       })
 
     for (var i = 0; i < 5; i++) {

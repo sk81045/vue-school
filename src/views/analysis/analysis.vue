@@ -39,9 +39,9 @@ import BarChart from '@/components/BarChart/BarChart'
 
 const lineChartData = {
   newVisitis: {
-    expectedData: [20000, 50885, 60885, 30485, 60885],
+    expectedData: [30855, 50885, 60885, 30485, 60885],
     actualData: [20885, 40885, 30885, 39885, 43885],
-    gzData: [30885, 30522, 520, 50885, 37885]
+    gzData: [30885, 30522, 35020, 50885, 37885]
   },
   messages: {
     expectedData: [200, 192, 120, 144, 160, 130, 140],
@@ -81,9 +81,9 @@ export default {
         span: 6,
         data: [
           {
-            title: '分类统计',
+            title: '小学学段人数',
             subtitle: '实时',
-            count: 7993,
+            count: 7953,
             allcount: 10222,
             text: '当前分类总记录数',
             color: 'rgb(49, 180, 141)',

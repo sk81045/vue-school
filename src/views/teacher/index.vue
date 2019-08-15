@@ -87,7 +87,6 @@ export default {
     fetchData(page,parPage) {
       this.listLoading = true
       getList(page,parPage).then(response => {
-        console.log(response.data.per_page)
         this.list = response.data.data
         this.pageSize = response.data.per_page
         this.total = response.data.total
