@@ -178,63 +178,32 @@ export const constantRoutes = [
   },
 
   {
-    path: '/example',
+    path: '/resource',
     component: Layout,
-    redirect: '/example/table',
-    name: '组件',
-    meta: { title: '组件', icon: 'example' },
-    children: [
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: '表格', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: '树形图', icon: 'tree' }
-      },
-      {
-        path: 'charts',
-        name: 'Charts',
-        component: () => import('@/views/charts/index'),
-        meta: { title:'图表', icon: 'table'}
-      },
-      {
-        path: 'map',
-        name: 'Map',
-        component: () => import('@/views/charts/map'),
-        meta: { title:'地图', icon: 'table'}
-      },
-      {
-        path: 'tabs',
-        name: 'Tabs',
-        component: () => import('@/views/charts/tab'),
-        meta: { title:'Tab', icon: 'table'}
-      },
-      {
-        path: 'drawer',
-        name: 'Drawer',
-        component: () => import('@/views/charts/drawer'),
-        meta: { title:'抽屉',icon: 'table'}
-      }
-    ]
+    redirect: '/resource',
+    children: [{
+      path: 'resource',
+      name: 'Resource',
+      component: () => import('@/views/resource/resource'),
+      meta: { title: '优质资源分布', icon: 'dashboard' }
+    }]
   },
 
+
   {
-    path: '/form',
+    path: '/finecourse',
     component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: '表单', icon: 'form' }
-      }
-    ]
+    redirect: '/finecourse',
+    children: [{
+      path: 'finecourse',
+      name: 'Finecourse',
+      component: () => import('@/views/finecourse/finecourse'),
+      meta: { title: '优质课评估', icon: 'dashboard' }
+    }]
   },
+
+
+
 
   {
     path: '/nested',
