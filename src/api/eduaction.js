@@ -1,16 +1,15 @@
 import request from '@/utils/request'
 
-export function getList(page = 0, parPage = 10) {
+export function getList(page = 0, parPage = 10,query = '') {
   return request({
-    url: '/api/v1/eduall?page='+page+'&limit='+parPage,
+    url: '/api/v1/eduall?page='+page+'&limit='+parPage+'&query='+JSON.stringify(query),
     method: 'get',
   })
 }
 
-export function test(params) {
-	return request({
-	  url: '/api/v1/cafes/page/0',
-	  method: 'get',
-	  params		
-	})
+export function stuEdu(page = 0, parPage = 10,query = '') {
+  return request({
+    url: '/api/v1/stuedu?page='+page+'&limit='+parPage+'&query='+JSON.stringify(query),
+    method: 'get',
+  })
 }

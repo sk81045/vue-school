@@ -2,6 +2,10 @@
   <div class="app-container">
     <div class="filter-container">
 
+      <el-select v-model="listQuery.school_id" placeholder="选择学校" clearable style="width: 200px" class="filter-item">
+        <el-option v-for="item in calendarTypeOptions" :key="item.key" :label="item.display_name" :value="item.key" />
+      </el-select>   
+
       <el-select v-model="listQuery.type" placeholder="学段" clearable style="width: 90px" class="filter-item">
         <el-option v-for="item in importanceOptions" :key="item" :label="item" :value="item" />
       </el-select>
@@ -9,9 +13,9 @@
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         搜索
       </el-button>
-<!--       <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleCreate">
+      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleCreate">
         Add
-      </el-button> -->
+      </el-button>
       <el-button v-waves :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download" @click="handleDownload">
         Export
       </el-button>
@@ -32,19 +36,29 @@
           {{ scope.$index }}
         </template>
       </el-table-column>
+      <el-table-column label="学生" width="110" align="center">
+        <template slot-scope="scope">
+          <span>{{ scope.row.name }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="学校">
         <template slot-scope="scope">
-          {{ scope.row.title }}
+          {{ scope.row.student_sc.title }}
         </template>
       </el-table-column>
-      <el-table-column label="学段">
+      <el-table-column label="年级" width="110" align="center">
         <template slot-scope="scope">
-          {{ scope.row.type }}
+          <span>{{ scope.row.grade_id }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="人数" width="110" align="center">
+      <el-table-column label="考试类型" width="110" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.stucount }}人</span>
+          {{ scope.row.mobile }}
+        </template>
+      </el-table-column>
+      <el-table-column label="考试日期" width="110" align="center">
+        <template slot-scope="scope">
+          {{ scope.row.mobile }}
         </template>
       </el-table-column>
       <el-table-column label="总分" width="110" align="center">
@@ -52,30 +66,18 @@
           {{ scope.row.mobile }}
         </template>
       </el-table-column>
+
       <el-table-column class-name="status-col" label="平均分" width="110" align="center">
         <template slot-scope="scope">
           <el-tag :type="scope.row.status | statusFilter">87</el-tag>
         </template>
       </el-table-column>
-      
-      <el-table-column class-name="status-col" label="优秀率" width="110" align="center">
-        <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">100%</el-tag>
-        </template>
-      </el-table-column>
-      
-      <el-table-column class-name="status-col" label="及格率" width="110" align="center">
-        <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
-        </template>
-      </el-table-column>
 
-      <el-table-column class-name="status-col" label="双优率" width="110" align="center">
+      <el-table-column class-name="status-col" label="最高分" width="110" align="center">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
+          <el-tag :type="scope.row.status | statusFilter">87</el-tag>
         </template>
       </el-table-column>
-
 
       <el-table-column class-name="status-col" label="教学效果" width="110" align="center">
         <template slot-scope="scope">
@@ -145,7 +147,7 @@
 </template>
 
 <script>
-import { getList,test } from '@/api/eduaction'
+import { stuEdu } from '@/api/eduaction'
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
@@ -188,13 +190,14 @@ export default {
       listLoading: true,
       listQuery: {
         type: undefined,
+        school_id: undefined
       },
       importanceOptions: ['高中', '初中', '小学'],
       calendarTypeOptions: [
-        { key: 'CNs', display_name: 'XX中学' },
-        { key: 'US', display_name: 'USA' },
-        { key: 'JP', display_name: 'Japan' },
-        { key: 'EU', display_name: 'Eurozone' }
+        { key: '1', display_name: 'XX中学' },
+        { key: '2', display_name: 'USA' },
+        { key: '3', display_name: 'Japan' },
+        { key: '4', display_name: 'Eurozone' }
       ],
       sortOptions: [{ label: 'ID Ascending', key: '+id' }, { label: 'ID Descending', key: '-id' }],
       statusOptions: ['published', 'draft', 'deleted'],
@@ -231,7 +234,7 @@ export default {
   methods: {
     getList(page,parPage) {
       this.listLoading = true
-      getList(page,parPage,this.listQuery).then(response => {  
+      stuEdu(page,parPage,this.listQuery).then(response => {  
         this.list = response.data.data
         this.total = response.data.total
         this.pageSize = response.data.per_page

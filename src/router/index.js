@@ -83,13 +83,25 @@ export const constantRoutes = [
   {
     path: '/eduaction',
     component: Layout,
-    redirect: '/eduaction',
-    children: [{
-      path: 'eduaction',
+    redirect: '/eduaction/index',
+    name: '教学质量分析',
+    meta: { title: '教学质量总览', icon: 'example' },
+    children: [
+    {
+      path: 'index',
       name: 'Eduaction',
       component: () => import('@/views/eduaction/index'),
-      meta: { title: '教学质量分析表', icon: 'dashboard' }
-    }]
+      meta: { title: '学校教学质量分析表', icon: 'dashboard' }
+    },
+
+    {
+      path: 'stuedu',
+      name: 'Studentedu',
+      component: () => import('@/views/eduaction/stuedu'),
+      meta: { title: '学生教学质量分析表', icon: 'tree' }
+    },
+
+    ]
   },
 
   {
