@@ -13,3 +13,10 @@ export function stuEdu(page = 0, parPage = 10,query = '') {
     method: 'get',
   })
 }
+
+export function selectSc(id) {    //查询学校信息
+  return request({
+    url: '/api/v1/schoolinfo?id='+id,
+    method: 'get',
+  })
+}

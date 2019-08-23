@@ -2,8 +2,8 @@
   <div class="app-container">
     <div class="filter-container">
 
-      <el-select v-model="listQuery.school_id" placeholder="选择学校" clearable style="width: 200px" class="filter-item">
-        <el-option v-for="item in calendarTypeOptions" :key="item.key" :label="item.display_name" :value="item.key" />
+      <el-select v-model="listQuery.school_id" @change="selectSc" placeholder="选择学校" clearable style="width: 200px" class="filter-item">
+        <el-option v-for="item in calendarTypeOptions" :key="item.id" :label="item.title" :value="item.id"  />
       </el-select>   
 
       <el-select v-model="listQuery.type" placeholder="学段" clearable style="width: 90px" class="filter-item">
@@ -147,23 +147,11 @@
 </template>
 
 <script>
-import { stuEdu } from '@/api/eduaction'
+import { stuEdu, selectSc } from '@/api/eduaction'
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
 
-const calendarTypeOptions = [
-  { key: 'CNs', display_name: 'China' },
-  { key: 'US', display_name: 'USA' },
-  { key: 'JP', display_name: 'Japan' },
-  { key: 'EU', display_name: 'Eurozone' }
-]
-
-// arr to obj, such as { CN : "China", US : "USA" }
-const calendarTypeKeyValue = calendarTypeOptions.reduce((acc, cur) => {
-  acc[cur.key] = cur.display_name
-  return acc
-}, {})
 
 export default {
   name: 'ComplexTable',
@@ -194,10 +182,10 @@ export default {
       },
       importanceOptions: ['高中', '初中', '小学'],
       calendarTypeOptions: [
-        { key: '1', display_name: 'XX中学' },
-        { key: '2', display_name: 'USA' },
-        { key: '3', display_name: 'Japan' },
-        { key: '4', display_name: 'Eurozone' }
+        { id: '101', title: 'XX中学' },
+        { id: '203', title: 'USA' },
+        { id: '303', title: 'Japan' },
+        { id: '404', title: 'Eurozone' }
       ],
       sortOptions: [{ label: 'ID Ascending', key: '+id' }, { label: 'ID Descending', key: '-id' }],
       statusOptions: ['published', 'draft', 'deleted'],
@@ -230,6 +218,7 @@ export default {
   },
   created() {
     this.getList()
+    this.selectSc()
   },
   methods: {
     getList(page,parPage) {
@@ -263,6 +252,15 @@ export default {
     handleFilter() {
       this.getList()
     },
+
+    selectSc(index = '') {
+      selectSc(index).then(response => {  
+         console.log('selectSc',response)
+         this.calendarTypeOptions = response.data
+         this.importanceOptions = response.data[0].grade
+      })
+    },
+
     handleModifyStatus(row, status) {
       this.$message({
         message: '操作Success',

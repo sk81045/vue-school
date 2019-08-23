@@ -85,7 +85,7 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/eduaction/index',
     name: '教学质量分析',
-    meta: { title: '教学质量总览', icon: 'example' },
+    meta: { title: '教学质量分析', icon: 'example' },
     children: [
     {
       path: 'index',
@@ -107,13 +107,23 @@ export const constantRoutes = [
   {
     path: '/excellent',
     component: Layout,
-    redirect: '/excellent',
-    children: [{
-      path: 'excellent',
+    redirect: '/excellent/index',
+    name: '优质课评选',
+    meta: { title: '优质课评选', icon: 'dashboard' },
+    children: [
+    {
+      path: 'index',
       name: 'Excellent',
-      component: () => import('@/views/eduaction/index'),
-      meta: { title: '优质课评选', icon: 'dashboard' }
-    }]
+      component: () => import('@/views/excellent/index'),
+      meta: { title: '优质课列表', icon: 'dashboard' }
+    },
+    {
+        path: 'list',
+        name: 'List',
+        component: () => import('@/views/school/list'),
+        meta: { title: '学校列表', icon: 'tree' }
+    },
+    ]
   },
 
   {
@@ -193,12 +203,22 @@ export const constantRoutes = [
     path: '/resource',
     component: Layout,
     redirect: '/resource',
-    children: [{
-      path: 'resource',
-      name: 'Resource',
-      component: () => import('@/views/resource/resource'),
-      meta: { title: '优质资源分布', icon: 'dashboard' }
-    }]
+    name: '优质资源分布',
+    meta: { title: '优质资源分布', icon: 'example' },
+    children: [
+      {
+        path: 'fineteacher',
+        name: 'Fineteacher',
+        component: () => import('@/views/resource/fineteacher'),
+        meta: { title: '优秀教师', icon: 'dashboard' }
+      },
+      {
+        path: 'school',
+        name: 'School',
+        component: () => import('@/views/student/count'),
+        meta: { title: '学生各项信息统计', icon: 'tree' }
+      }
+    ]
   },
 
 
